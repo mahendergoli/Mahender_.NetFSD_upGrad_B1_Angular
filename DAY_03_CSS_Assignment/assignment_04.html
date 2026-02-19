@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureBank Dashboard</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="stylesheet_04.css">
+
+    <!-- Internal CSS: Account Balance Highlight -->
+    <style>
+        #balance-highlight {
+            background-color: #d8f5d0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Inline CSS: Warning notification -->
+<div style="background:red;color:white;padding:12px;text-align:center;">
+    Warning: Unusual login activity detected!
+</div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <h2>SecureBank</h2>
+    <ul>
+        <li>Dashboard</li>
+        <li>Accounts</li>
+        <li>Transactions</li>
+        <li>Settings</li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<div class="main">
+
+    <!-- Top Header -->
+    <header>
+        <h1>Welcome Back</h1>
+    </header>
+
+    <!-- Account Summary Cards -->
+    <section class="summary">
+        <div class="card" id="balance-highlight">Balance: ₹85,000</div>
+        <div class="card">Savings: ₹40,000</div>
+        <div class="card">Loans: ₹15,000</div>
+    </section>
+
+    <!-- Recent Transactions Table -->
+    <section>
+        <h2>Recent Transactions</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+
+            <tr class="credit">
+                <td>10 Feb</td>
+                <td>Salary</td>
+                <td>+ ₹30,000</td>
+            </tr>
+
+            <tr class="debit">
+                <td>11 Feb</td>
+                <td>Shopping</td>
+                <td>- ₹2,000</td>
+            </tr>
+
+            <tr class="credit">
+                <td>12 Feb</td>
+                <td>Refund</td>
+                <td>+ ₹1,500</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Styled Login Form -->
+    <section class="login">
+        <h2>Login</h2>
+        <form>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button>Login</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 SecureBank</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

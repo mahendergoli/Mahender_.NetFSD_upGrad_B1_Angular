@@ -1,0 +1,109 @@
+/* Element selector */
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f4f7fb;
+}
+
+/* Sidebar layout */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background: #1f3a5f;
+    color: white;
+    float: left;
+    padding: 20px;
+}
+
+/* Group selector */
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+/* Main content area */
+.main {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+/* Class selector */
+.card {
+    margin: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background: white;
+    display: inline-block;
+    width: 200px;
+}
+
+/* Descendant selector */
+.summary .card {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Hover effect on transaction rows */
+tr:hover {
+    background-color: #eef5ff;
+}
+
+/* Credit & Debit colors */
+.credit {
+    color: green;
+}
+
+.debit {
+    color: red;
+}
+
+/* Login form styling */
+.login form {
+    margin-top: 20px;
+}
+
+.login input {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    width: 250px;
+}
+
+/* Attribute selector */
+input[type="password"] {
+    border: 2px solid #1f3a5f;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background: #1f3a5f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Pseudo-class: button active */
+button:active {
+    background: black;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: gray;
+}

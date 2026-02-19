@@ -1,0 +1,32 @@
+
+
+
+
+.product-card {
+    padding:20px;
+    border:1px solid;
+    margin:10px;
+    width:200px;
+    box-shadow:0 0 5px gray;
+}
+
+.product-card img {
+    width:100%;
+}
+
+input[type="checkbox"] {
+    margin:5px;
+}
+
+.product-card:hover {
+    transform:scale(1.05);
+}
+
+.product-card:nth-child(even) {
+    background:#f0f0f0;
+}
+
+.products {
+    display:flex;
+    flex-wrap:wrap;
+}
