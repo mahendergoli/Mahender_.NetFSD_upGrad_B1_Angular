@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Evaluator</title>
+</head>
+<body>
+
+<h2>Student Grade Evaluator</h2>
+
+<label>Enter Marks:</label>
+<input type="number" id="marksInput">
+<button onclick="evaluateGrade()">Check Grade</button>
+
+<p id="result"></p>
+
+<script>
+    // Button click event
+    function evaluateGrade() {
+
+        // Accept marks as variable (numeric)
+        let marks = Number(document.getElementById("marksInput").value);
+
+        // Conditional logic using if–else and comparison operators
+        if (marks >= 75) {
+            document.getElementById("result").innerHTML = "Grade: A";
+            console.log("Grade: A");
+        }
+        else if (marks >= 60 && marks < 75) {
+            document.getElementById("result").innerHTML = "Grade: B";
+            console.log("Grade: B");
+        }
+        else if (marks >= 40 && marks < 60) {
+            document.getElementById("result").innerHTML = "Grade: C";
+            console.log("Grade: C");
+        }
+        else {
+            document.getElementById("result").innerHTML = "Result: Fail";
+            console.log("Result: Fail");
+        }
+    }
+</script>
+
+</body>
+</html>

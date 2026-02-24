@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Signal Simulator</title>
+</head>
+<body>
+
+<h2>Traffic Signal Simulator</h2>
+
+<script>
+    // Store signal color in a variable (string)
+    let signal = "yellow";
+
+    // Use switch–case to display instruction
+    switch(signal) {
+        case "red":
+            console.log("Signal: Red");
+            console.log("Instruction: Stop");
+            break;
+
+        case "yellow":
+            console.log("Signal: Yellow");
+            console.log("Instruction: Get Ready");
+            break;
+
+        case "green":
+            console.log("Signal: Green");
+            console.log("Instruction: Go");
+            break;
+
+        default:
+            console.log("Invalid signal color entered");
+    }
+</script>
+
+</body>
+</html>

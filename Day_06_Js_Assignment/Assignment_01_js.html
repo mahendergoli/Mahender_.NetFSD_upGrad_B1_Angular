@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+
+    <style>
+        /* Desktop default styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            font-size: 18px;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #555;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #222;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* -------- Media Query for Mobile -------- */
+        @media screen and (max-width: 600px) {
+            body {
+                background-color: blue; /* change background on mobile */
+                font-size: 14px; /* smaller font */
+            }
+
+            nav {
+                flex-direction: column; /* vertical navigation */
+                align-items: center;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Responsive Webpage Demo</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="content">
+    <h2>Welcome</h2>
+    <p>This page adapts to mobile and desktop screens.</p>
+    <p id="screenInfo"></p>
+</div>
+
+<!-- Internal JavaScript -->
+<script>
+    function updateScreenInfo() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        document.getElementById("screenInfo").innerHTML =
+            "Screen Size: " + width + " x " + height;
+    }
+
+    // Run on load
+    updateScreenInfo();
+
+    // Run whenever screen is resized
+     window.onresize = updateScreenInfo;
+</script>
+
+</body>
+</html>

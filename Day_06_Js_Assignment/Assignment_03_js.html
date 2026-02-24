@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Discount Calculator</title>
+</head>
+<body>
+    <h1>SIMPLE DISCOUNT CALCULATOR</h1>
+    <label>Enter Amount: </label>
+    <input type="number" id="data">
+    <button onclick="toDo()">Check discount</button>
+    <br>
+    <hr>
+    <p1 id="displayhere"></p1><br>
+    <p1 id="display2"></p1>
+
+    <script>
+        function toDo(){
+            let amount = Number(document.getElementById("data").value)
+            if(amount >= 5000){
+                document.getElementById("displayhere").innerHTML = "20% Discount applied...... ";
+                let a = amount * 0.20;
+                document.getElementById("display2").innerHTML = "Amount to pay: " + (amount - a) ;
+            }
+            else if(amount >= 3000){
+                 document.getElementById("displayhere").innerHTML = "10% Discount applied..... ";
+                let a = amount * 0.10;
+                document.getElementById("display2").innerHTML = "Amount to pay: " + (amount - a) ;
+            }
+            else{
+                 document.getElementById("displayhere").innerHTML = "No Discount applied.......";
+                document.getElementById("display2").innerHTML = "Amount to pay: " + amount ;
+            }
+        }
+    </script>
+    
+</body>
+</html>
