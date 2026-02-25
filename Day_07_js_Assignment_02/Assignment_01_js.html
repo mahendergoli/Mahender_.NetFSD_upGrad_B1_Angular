@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Book Store</title>
+</head>
+<body>
+
+<h2>Online Book Store Inventory</h2>
+<button onclick="runAllTasks()">Run Inventory Operations</button>
+
+<pre id="output"></pre>
+
+<script>
+
+let books = [
+  { id: 1, title: "JavaScript Basics", price: 450, stock: 10 },
+  { id: 2, title: "React Guide", price: 650, stock: 5 },
+  { id: 3, title: "Node.js Mastery", price: 550, stock: 8 },
+  { id: 4, title: "CSS Complete", price: 300, stock: 12 }
+];
+
+function runAllTasks() {
+
+    let result = "";
+
+    // 1. Display all book titles (map)
+    let titles = books.map(book => book.title);
+    result += "1. Book Titles:\n" + titles.join(", ") + "\n\n";
+
+    // 2. Total inventory value (reduce)
+    let totalValue = books.reduce((sum, book) => sum + (book.price * book.stock), 0);
+    result += "2. Total Inventory Value: ₹" + totalValue + "\n\n";
+
+    // 3. Books costing above ₹500 (filter)
+    let costlyBooks = books.filter(book => book.price > 500);
+    result += "3. Books above ₹500:\n";
+    costlyBooks.forEach(b => result += b.title + " - ₹" + b.price + "\n");
+    result += "\n";
+
+    // 4. Increase price by 5% (map)
+    books = books.map(book => ({
+        ...book,
+        price: Math.round(book.price * 1.05)
+    }));
+    result += "4. Prices increased by 5%\n\n";
+
+    // 5. Sort books by price (low to high) (sort)
+    books.sort((a, b) => a.price - b.price);
+    result += "5. Books sorted by price:\n";
+    books.forEach(b => result += b.title + " - ₹" + b.price + "\n");
+    result += "\n";
+
+    // 6. Remove a book by ID (find + filter)
+    let removeId = 2;
+    let foundBook = books.find(book => book.id === removeId);
+    books = books.filter(book => book.id !== removeId);
+    result += "6. Removed Book ID " + removeId + ": " + (foundBook ? foundBook.title : "Not Found") + "\n\n";
+
+    // 7. Check if any book is out of stock (some)
+    let outOfStock = books.some(book => book.stock === 0);
+    result += "7. Any book out of stock? " + (outOfStock ? "Yes" : "No") + "\n\n";
+
+    // -------- Bonus --------
+
+    // Group books by price range
+    let grouped = {
+        below500: books.filter(b => b.price < 500),
+        above500: books.filter(b => b.price >= 500)
+    };
+    result += "Bonus: Books grouped by price range\n";
+    result += "Below ₹500: " + grouped.below500.map(b => b.title).join(", ") + "\n";
+    result += "Above ₹500: " + grouped.above500.map(b => b.title).join(", ") + "\n\n";
+
+    // Add discount only for books above ₹600
+    let discounted = books.map(book => {
+        if (book.price > 600) {
+            return { ...book, price: Math.round(book.price * 0.90) };
+        }
+        return book;
+    });
+    result += "Discount applied to books above ₹600\n\n";
+
+    // Generate invoice string using join()
+    let invoice = discounted.map(book => book.title + " - ₹" + book.price).join("\n");
+    result += "Invoice:\n" + invoice;
+
+    document.getElementById("output").textContent = result;
+}
+
+</script>
+
+</body>
+</html>

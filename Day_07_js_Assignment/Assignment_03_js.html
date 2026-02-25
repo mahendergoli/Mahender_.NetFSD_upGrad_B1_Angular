@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Logger</title>
+</head>
+<body>
+
+<h2>Location-Based Weather Logger</h2>
+
+<button onclick="getLocation()">Get My Location</button>
+
+<h3>Current Location</h3>
+<p id="currentLocation"></p>
+
+<h3>Location History (Last 5)</h3>
+<ul id="locationHistory"></ul>
+
+<script>
+
+    // Load history when page opens
+    window.onload = function() {
+        displayHistory();
+    };
+
+    // Get current location
+    function getLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            document.getElementById("currentLocation").innerHTML = "Geolocation not supported by this browser.";
+        }
+    }
+
+    // Success callback
+    function successCallback(position) {
+
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+
+        document.getElementById("currentLocation").innerHTML =
+            "Latitude: " + latitude + "<br>Longitude: " + longitude;
+
+        // Create location object
+        let locationEntry = {
+            lat: latitude,
+            long: longitude,
+            time: new Date().toLocaleString()
+        };
+
+        // Get existing history from localStorage
+        let history = JSON.parse(localStorage.getItem("locations")) || [];
+
+        // Add new location
+        history.unshift(locationEntry);
+
+        // Keep only last 5 entries
+        if (history.length > 5) {
+            history = history.slice(0, 5);
+        }
+
+        // Save back to localStorage
+        localStorage.setItem("locations", JSON.stringify(history));
+
+        // Update history display
+        displayHistory();
+    }
+
+    // Error callback
+    function errorCallback(error) {
+        let message = "";
+
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                message = "Permission denied. Please allow location access.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                message = "Location unavailable.";
+                break;
+            case error.TIMEOUT:
+                message = "Location request timed out.";
+                break;
+            default:
+                message = "Unknown error occurred.";
+        }
+
+        document.getElementById("currentLocation").innerHTML = message;
+    }
+
+    // Display location history
+    function displayHistory() {
+        let history = JSON.parse(localStorage.getItem("locations")) || [];
+        let list = document.getElementById("locationHistory");
+        list.innerHTML = "";
+
+        history.forEach(function(loc) {
+            let li = document.createElement("li");
+            li.innerHTML = "Lat: " + loc.lat + " , Long: " + loc.long + " (" + loc.time + ")";
+            list.appendChild(li);
+        });
+    }
+
+</script>
+
+</body>
+</html>

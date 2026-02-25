@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart Management</title>
+</head>
+<body>
+
+<h2>Shopping Cart Management</h2>
+<button onclick="runCartOperations()">Run Cart Operations</button>
+
+<pre id="output"></pre>
+
+<script>
+
+let cart = [
+  { id: 1, product: "Laptop", price: 60000, qty: 1 },
+  { id: 2, product: "Headphones", price: 2000, qty: 2 },
+  { id: 3, product: "Mouse", price: 800, qty: 1 }
+];
+
+function runCartOperations() {
+
+    let result = "";
+
+    // 1. Total cart value (reduce)
+    let totalValue = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    result += "1. Total Cart Value: ₹" + totalValue + "\n\n";
+
+    // 2. Increase quantity of a product (map)
+    let productIdToIncrease = 2;
+    cart = cart.map(item => 
+        item.id === productIdToIncrease ? { ...item, qty: item.qty + 1 } : item
+    );
+    result += "2. Quantity increased for product ID 2\n\n";
+
+    // 3. Remove product from cart (filter)
+    let removeId = 3;
+    cart = cart.filter(item => item.id !== removeId);
+    result += "3. Product with ID 3 removed\n\n";
+
+    // 4. Apply 10% discount on items above ₹10,000 (map)
+    cart = cart.map(item => 
+        item.price > 10000 ? { ...item, price: Math.round(item.price * 0.90) } : item
+    );
+    result += "4. Discount applied on expensive items\n\n";
+
+    // 5. Sort cart by total item price (sort)
+    cart.sort((a, b) => (a.price * a.qty) - (b.price * b.qty));
+    result += "5. Cart sorted by total item price\n\n";
+
+    // 6. Check if any product costs more than ₹50,000 (some)
+    let costly = cart.some(item => item.price > 50000);
+    result += "6. Any product above ₹50,000? " + (costly ? "Yes" : "No") + "\n\n";
+
+    // 7. Check if all items are in stock (every)
+    let inStock = cart.every(item => item.qty > 0);
+    result += "7. All items in stock? " + (inStock ? "Yes" : "No") + "\n\n";
+
+    // -------- Bonus --------
+
+    // Convert cart into invoice format (map + join)
+    let invoice = cart.map(item =>
+        item.product + " | ₹" + item.price + " x " + item.qty + 
+        " = ₹" + (item.price * item.qty)
+    ).join("\n");
+    result += "Bonus: Invoice\n" + invoice + "\n\n";
+
+    // Find most expensive product (reduce)
+    let expensive = cart.reduce((max, item) =>
+        item.price > max.price ? item : max
+    );
+    result += "Most Expensive Product: " + expensive.product + " (₹" + expensive.price + ")\n\n";
+
+    // Calculate GST (18%) on total
+    let gst = totalValue * 0.18;
+    let finalAmount = totalValue + gst;
+    result += "GST (18%): ₹" + gst.toFixed(2) + "\n";
+    result += "Final Amount with GST: ₹" + finalAmount.toFixed(2);
+
+    document.getElementById("output").textContent = result;
+}
+
+</script>
+
+</body>
+</html>

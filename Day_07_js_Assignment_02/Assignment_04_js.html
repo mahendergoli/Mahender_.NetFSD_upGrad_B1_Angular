@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Payroll System</title>
+</head>
+<body>
+
+<h2>Employee Payroll Analytics</h2>
+<button onclick="runPayroll()">Run Payroll Analysis</button>
+
+<pre id="output"></pre>
+<div id="tableArea"></div>
+
+<script>
+
+let employees = [
+ { id:1, name:"Ravi", dept:"IT", salary:70000 },
+ { id:2, name:"Anita", dept:"HR", salary:50000 },
+ { id:3, name:"Karan", dept:"IT", salary:80000 },
+ { id:4, name:"Meena", dept:"Finance", salary:60000 }
+];
+
+function runPayroll() {
+
+    let result = "";
+
+    // 1. Total salary expense (reduce)
+    let totalSalary = employees.reduce((sum, emp) => sum + emp.salary, 0);
+    result += "1. Total Salary Expense: ₹" + totalSalary + "\n\n";
+
+    // 2. Highest & lowest paid employee (reduce)
+    let highest = employees.reduce((max, emp) => emp.salary > max.salary ? emp : max);
+    let lowest = employees.reduce((min, emp) => emp.salary < min.salary ? emp : min);
+
+    result += "2. Highest Paid: " + highest.name + " ₹" + highest.salary + "\n";
+    result += "   Lowest Paid: " + lowest.name + " ₹" + lowest.salary + "\n\n";
+
+    // 3. Increase IT department salary by 15% (map)
+    let updatedEmployees = employees.map(emp => 
+        emp.dept === "IT" ? { ...emp, salary: Math.round(emp.salary * 1.15) } : emp
+    );
+    result += "3. IT salaries increased by 15%\n\n";
+
+    // 4. Group employees by department (reduce)
+    let grouped = employees.reduce((acc, emp) => {
+        if (!acc[emp.dept]) acc[emp.dept] = [];
+        acc[emp.dept].push(emp);
+        return acc;
+    }, {});
+
+    result += "4. Grouped by Department:\n";
+    for (let dept in grouped) {
+        result += dept + ": " + grouped[dept].map(e => e.name).join(", ") + "\n";
+    }
+    result += "\n";
+
+    // 5. Department-wise average salary
+    result += "5. Department Average Salaries:\n";
+    for (let dept in grouped) {
+        let avg = grouped[dept].reduce((sum, emp) => sum + emp.salary, 0) / grouped[dept].length;
+        result += dept + ": ₹" + avg.toFixed(2) + "\n";
+    }
+    result += "\n";
+
+    // 6. Sort employees by salary descending (sort)
+    let sorted = [...employees].sort((a, b) => b.salary - a.salary);
+    result += "6. Employees sorted by salary (desc):\n";
+    sorted.forEach(e => result += e.name + " ₹" + e.salary + "\n");
+    result += "\n";
+
+    // -------- Bonus --------
+
+    // Tax deduction (10%)
+    let afterTax = employees.map(emp => ({
+        ...emp,
+        salaryAfterTax: Math.round(emp.salary * 0.90)
+    }));
+    result += "Bonus: Salaries after 10% tax applied\n\n";
+
+    // Employees earning above average salary
+    let avgSalary = totalSalary / employees.length;
+    let aboveAvg = employees.filter(emp => emp.salary > avgSalary);
+    result += "Employees earning above average salary:\n";
+    aboveAvg.forEach(e => result += e.name + " ₹" + e.salary + "\n");
+    result += "\n";
+
+    // Convert employee data into HTML table
+    let table = "<h3>Employee Table</h3>";
+    table += "<table border='1' cellpadding='6'><tr><th>ID</th><th>Name</th><th>Dept</th><th>Salary</th></tr>";
+    employees.forEach(emp => {
+        table += "<tr><td>" + emp.id + "</td><td>" + emp.name + "</td><td>" + emp.dept + "</td><td>₹" + emp.salary + "</td></tr>";
+    });
+    table += "</table>";
+
+    document.getElementById("output").textContent = result;
+    document.getElementById("tableArea").innerHTML = table;
+}
+
+</script>
+
+</body>
+</html>

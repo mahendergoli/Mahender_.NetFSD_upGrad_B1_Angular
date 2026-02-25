@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment 5 – Data Cleaning & Analytics</title>
+</head>
+<body>
+
+<h2>Data Cleaning & Analytics Output</h2>
+<pre id="output"></pre>
+
+<script>
+let numbers = [10, 20, 30, 10, 40, 20, 50, 60, 60];
+let output = "";
+
+// 1. Remove duplicates
+let unique = [...new Set(numbers)];
+output += "1. Unique values: " + JSON.stringify(unique) + "\n\n";
+
+// 2. Second largest number
+let secondLargest = [...new Set(numbers)].sort((a,b)=>b-a)[1];
+output += "2. Second largest: " + secondLargest + "\n\n";
+
+// 3. Frequency of each element
+let frequency = numbers.reduce((acc, num)=>{
+    acc[num] = (acc[num] || 0) + 1;
+    return acc;
+}, {});
+output += "3. Frequency: " + JSON.stringify(frequency) + "\n\n";
+
+// 4. First non-repeating number
+let freqMap = numbers.reduce((acc, num)=>{
+    acc[num] = (acc[num] || 0) + 1;
+    return acc;
+}, {});
+let firstNonRepeat = numbers.find(num => freqMap[num] === 1);
+output += "4. First non-repeating: " + firstNonRepeat + "\n\n";
+
+// 5. Rotate array by 2 positions (right)
+let k = 2;
+let rotated = numbers.slice(-k).concat(numbers.slice(0, numbers.length-k));
+output += "5. Rotated array: " + JSON.stringify(rotated) + "\n\n";
+
+// 6. Flatten nested array
+let nested = [1,2,[3,4,[5]]];
+let flattened = nested.flat(Infinity);
+output += "6. Flattened array: " + JSON.stringify(flattened) + "\n\n";
+
+// 7. Find missing number
+let arr2 = [1,2,3,5,6];
+let n = 6;
+let expectedSum = (n*(n+1))/2;
+let actualSum = arr2.reduce((sum,num)=>sum+num,0);
+let missing = expectedSum - actualSum;
+output += "7. Missing number: " + missing;
+
+// display output
+document.getElementById("output").textContent = output;
+</script>
+
+</body>
+</html>
