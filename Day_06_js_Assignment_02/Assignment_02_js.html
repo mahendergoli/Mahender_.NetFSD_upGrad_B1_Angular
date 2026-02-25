@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple-Object</title>
+</head>
+<body>
+    <h1 style="color: red; text-align: center;">Simple Object Based User Info Display</h1>
+    <hr>
+    <br>
+    <label>Enter Name: </label>
+    <input type="text" id="uname"><br>
+     <label>Enter Age: </label>
+    <input type="text" id="age"><br>
+     <label>Enter city: </label>
+    <input type="text" id="city"><br>
+
+    <button onclick="todo()">Submit</button>
+    <hr>
+    <br>
+    <p id="displayname"></p>
+    <p id="displayage"></p>
+    <p id="displaycity"></p>
+
+    <script>
+        function todo(){
+            let user = {
+                name : document.getElementById("uname").value,
+                age: document.getElementById("age").value,
+                city : document.getElementById("city").value
+            };
+
+            displayUserInfo(user);
+        }
+        //---------------------------------------------
+        function displayUserInfo(userInfo){
+            document.getElementById("displayname").innerHTML = "hi my name is "+userInfo.name
+                 document.getElementById("displayage").innerHTML = "and my Age is "+userInfo.age;
+                    document.getElementById("displaycity").innerHTML = "I Live in "+userInfo.city;
+
+
+
+
+        }
+
+    </script>
+
+
+
+</body>
+</html>

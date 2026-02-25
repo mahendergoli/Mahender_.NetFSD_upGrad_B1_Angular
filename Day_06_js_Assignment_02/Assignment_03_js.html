@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="color: red; text-align: center;">Counter App</h1><br><br>
+
+    <h1 id="Counterdisplay">0</h1>
+
+    <button id="Increment">Increase Value</button>
+    <button id="RestVal">Reset</button>
+
+    <script>
+        let counter = 0;
+        function IncreaseVal(val){
+            counter = counter + val;
+            document.getElementById("Counterdisplay").innerHTML = counter;
+        }
+
+        function resetval(){
+            let counter = 0;
+            document.getElementById("Counterdisplay").innerHTML = counter;
+        }
+
+        //eventlisterner
+        document.getElementById("Increment").addEventListener("click", function(){
+            IncreaseVal(1);
+        });
+
+        document.getElementById("RestVal").addEventListener("click", function(){
+            resetval();
+        });
+
+
+    </script>
+    
+</body>
+</html>

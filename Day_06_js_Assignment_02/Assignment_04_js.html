@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studeent</title>
+</head>
+<body>
+    <h1 style="color: red; text-align: center;">Dynamic Student Profile Manager</h1>
+    <label>Enter Name: </label>
+    <input type="text" id="uname">
+    <label>Rollno: </label>
+    <input type="number" id="roll">
+    <label>Enter Marks: </label>
+    <input type="text" id="marks"><br>
+    <br>
+    <button id="showprofile">Show Profile</button><br><br>
+    <label>Update Marks:</label>
+    <input type="number" id="upmarks">
+    <button id="updateMarks">Update Marks</button>
+    <hr>
+    <br>
+    <div id="displayProfile">
+
+    </div>
+
+    <script>
+        let student = {}
+
+        document.getElementById("showprofile").addEventListener("click", function(){
+            student.name = document.getElementById("uname").value;
+            student.rollno = document.getElementById("roll").value;
+            student.marks = document.getElementById("marks").value;
+
+            UpdatedProfileInfo(student);
+        })
+
+
+        //event listerner
+        document.getElementById("showprofile").addEventListener("click",function(){
+            UpdatedProfileInfo(student);
+        });
+
+        document.getElementById("updateMarks").addEventListener("click", function(){
+            let updatemarked = Number(document.getElementById("upmarks").value);
+            updatedMarksAre(updatemarked);
+
+        });
+
+        function updatedMarksAre(val){
+            student.marks = val;
+            UpdatedProfileInfo(student);
+        }
+
+        function UpdatedProfileInfo(studentObj){
+            document.getElementById("displayProfile").innerHTML = 
+            "<h3>Student Details</h3>" +
+            "<p>Name: " + studentObj.name + "</p>" +
+            "<p>Roll No: " + studentObj.rollno + "</p>" +
+            "<p>Marks: " + studentObj.marks + "</p>";
+        }
+
+
+    </script>
+    
+</body>
+</html>
